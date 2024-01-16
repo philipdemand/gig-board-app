@@ -18,7 +18,7 @@
   .gig-container button {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: #2ecc71;
+    background-color: #2e95cc;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -42,14 +42,13 @@
   
   .gig-container h4 > button {
     display: block;
-    margin-top: 5px; /* Adjust the spacing as needed */
+    margin-top: 5px;
   }
   
   .gig-container button:last-child {
     margin-left: 10px;
   }
   
-  /* Application component styles (adjust as needed) */
   .Application {
     display: flex;
     flex-wrap: wrap;
@@ -58,4 +57,24 @@
   .Application button {
     margin-right: 10px;
     margin-bottom: 10px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .popout {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }

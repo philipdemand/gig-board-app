@@ -7,12 +7,12 @@ class GigsController < ApplicationController
     end
 
     def mine
-        gigs = Gig.where(director_id: params[:mine])
+        gigs = Gig.where(director_id: params[:mine]).order(start_date: :asc)
         render json: gigs
     end
 
     def index
-        gigs = Gig.all
+        gigs = Gig.all.order(start_date: :asc)
         render json: gigs
     end
     
@@ -37,7 +37,7 @@ class GigsController < ApplicationController
     private
 
     def gig_params
-        params.require(:gig).permit(:title, :description)
+        params.require(:gig).permit(:title, :description, :start_date, :end_date)
     end
 
 end

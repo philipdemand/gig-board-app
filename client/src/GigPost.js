@@ -7,6 +7,7 @@ function GigPost({ gig, onAddApp, onDeleteApp }) {
     const {user} = useContext(UserContext);
     const [isClicked, setIsClicked] = useState(false)
     const [message, setMessage] = useState('')
+    const [errorData, setErrorData] = useState([])
 
     const handleClick = () => {
         setIsClicked(!isClicked)
@@ -30,21 +31,43 @@ function GigPost({ gig, onAddApp, onDeleteApp }) {
             },
             body: JSON.stringify(postData)
         })
-        .then((r) => r.json())
-        .then(object => onAddApp(object))
-        .then(setIsClicked(false))
+        .then((r) => r.json()
+            .then((data) => {
+                if (r.ok) {
+                    onAddApp(data)
+                    setIsClicked(false)
+                    setErrorData([])
+                } else {
+                    setErrorData(data.errors)
+                }
+            })
+        ) 
     }
 
-    const handleCancelClick = () => {
-        fetch(`/applications/${gig.app_id}`, {
-            method: "DELETE"
-        })
-        .then(() => onDeleteApp(gig.app_id))
-    }
+    const handleCancelClick = async () => {
+        try {
+            const response = await fetch(`/applications/${gig.app_id}`, {
+                method: "DELETE"
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to cancel application. Status: ${response.status}`);
+            }
+            const responseBody = await response.text();
+            if (responseBody.trim() !== "") {
+                console.error("Unexpected response body:", responseBody);
+            }
+    
+            onDeleteApp(gig.app_id);
+        } catch (error) {
+            console.error("Error canceling application:", error.message);
+            setErrorData(["An error occurred while canceling the application. Please try again."]);
+        }
+    };
 
     return (
         <div className="gig-container">
         <h3>{gig.title}</h3>
+        Start Date: {gig.start_date}
         <h3>{gig.description}</h3>
         {gig.application_status 
             ? <><h4>Application: {gig.application_status}</h4> <button onClick={handleCancelClick}>Cancel Application</button></>
@@ -61,6 +84,9 @@ function GigPost({ gig, onAddApp, onDeleteApp }) {
             </form>
         : null
         }
+        {errorData ? <ul style={{ color: "red" }}>
+            {errorData.map((error, i) => <li key={i}>{error}</li>)}
+        </ul> : null}
         </div>
     )
 }

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/myapps/:id', to: 'applications#my_apps'
 
   resources :gigs, only: [:index, :update, :destroy]
-  resources :applications, only: :destroy
+  resources :applications, only: [:destroy, :update]
   
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

@@ -9,6 +9,9 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
     const [isClicked, setIsClicked] = useState(false)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+    const [errorData, setErrorData] = useState([])
 
     useEffect(() => {
         fetch(`/gigs/${user.role_id}`)
@@ -39,12 +42,24 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
         setDescription(e.target.value)
     }
 
+    const handleStartDateChange = (e) => {
+        setStartDate(e.target.value)
+    }
+
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value)
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+    
         const gigData = {
             title: title,
-            description: description
-        }
+            description: description,
+            start_date: startDate,
+            end_date: endDate
+        };
+    
         fetch(`/gigs/${user.role_id}`, {
             method: "POST",
             headers: {
@@ -52,16 +67,23 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
             },
             body: JSON.stringify(gigData)
         })
-        .then((r) => r.json())
-        .then(gigObj => {
-          onAddGig(gigObj);
-          setMyGigs([...myGigs, gigObj]);
-        });
-    }
+        .then((r) => r.json()
+            .then((data) => {
+                if (r.ok) {
+                    onAddGig(data);
+                    setMyGigs([...myGigs, data]);
+                    setIsClicked(false);
+                    setErrorData([])
+                } else {
+                    setErrorData(data.errors);
+                }
+            })
+        )
+    };
 
     return (
         <>
-        <h1>Director Page</h1>
+        <h1>Music Director Portal</h1>
         {!isClicked ? <button onClick={handleClick}>Post a New Gig</button> : null}
         {isClicked ?
         <div>
@@ -72,6 +94,20 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
                 name="title"
                 value={title}
                 onChange={handleTitleChange}
+                /><br></br>
+                Start Date:
+                <input 
+                type="date"
+                name="startdate"
+                value={startDate}
+                onChange={handleStartDateChange}
+                /><br></br>
+                End Date:
+                <input 
+                type="date"
+                name="enddate"
+                value={endDate}
+                onChange={handleEndDateChange}
                 />
                 <br></br>
                 Description:
@@ -87,7 +123,10 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
         </div>
         : null
         }
-        <h1>{user.username}'s Gigs</h1>
+        {errorData.length > 0 ? <ul style={{ color: "red" }}>
+          {errorData.map((error, i) => <li key={i}>{error}</li>)}
+        </ul> : null}
+        <h1>My Gigs</h1>
         {myGigs.map(myGig => 
             <Gig 
                 key={myGig.id} 

@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2023_12_18_182800) do
   create_table "gigs", force: :cascade do |t|
     t.bigint "director_id", null: false
     t.string "title", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

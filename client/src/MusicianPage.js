@@ -32,7 +32,7 @@ function MusicianPage({ gigs }) {
 
     return (
         <>
-        <h1>Musician Page</h1>
+        <h1>Musician Portal</h1>
         <h2>Gigs</h2>
         {gigsWithStatusAndAppId.map(gig => <GigPost key={gig.id} gig={gig} onAddApp={handleAddApp} onDeleteApp={handleDeleteApp}/>)}
         </>

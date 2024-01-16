@@ -23,6 +23,12 @@ class ApplicationsController < ApplicationController
         head :no_content
     end
 
+    def update
+        application = Application.find(params[:id])
+        application.update(application_params)
+        render json: application
+    end
+
     private
 
     def application_params
