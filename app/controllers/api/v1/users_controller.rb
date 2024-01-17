@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
 
     skip_before_action :authorized, only: [:create, :index]
     wrap_parameters :user, include: [:username, :email, :password, :password_confirmation, :role_type]

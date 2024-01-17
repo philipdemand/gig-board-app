@@ -8,7 +8,7 @@ function MusicianPage({ gigs }) {
     const [myApps, setMyApps] = useState([])
 
     useEffect(() => {
-        fetch(`/myapps/${user.role_id}`)
+        fetch(`/api/v1/myapps/${user.role_id}`)
         .then((r) => r.json())
         .then(object => setMyApps(object))
     }, [])

@@ -14,7 +14,7 @@ function Application({ application, onUpdateStatus }) {
   }, [])
 
   const handleAccept = async () => {
-    fetch(`/applications/${application.id}`, {
+    fetch(`/api/v1/applications/${application.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -34,7 +34,7 @@ function Application({ application, onUpdateStatus }) {
   };
 
   const handleReject = async () => {
-    fetch(`/applications/${application.id}`, {
+    fetch(`/api/v1/applications/${application.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"

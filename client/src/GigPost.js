@@ -24,7 +24,7 @@ function GigPost({ gig, onAddApp, onDeleteApp }) {
             message: message,
             status: "PENDING"
         }
-        fetch(`/applications/${user.role_id}`, {
+        fetch(`/api/v1/applications/${user.role_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -46,7 +46,7 @@ function GigPost({ gig, onAddApp, onDeleteApp }) {
 
     const handleCancelClick = async () => {
         try {
-            const response = await fetch(`/applications/${gig.app_id}`, {
+            const response = await fetch(`/api/v1/applications/${gig.app_id}`, {
                 method: "DELETE"
             });
             if (!response.ok) {

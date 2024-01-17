@@ -33,7 +33,7 @@ const LoginPage = () => {
     };
 
     try {
-      const res = await fetch("/login", {
+      const res = await fetch("/api/v1/login", {
         method: "POST",
         body: JSON.stringify(submittedUser),
         headers: {

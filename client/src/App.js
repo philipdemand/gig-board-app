@@ -7,6 +7,7 @@ import SignUpPage from './SignUpPage'
 import LandingPage from './LandingPage'
 import MusicianPage from './MusicianPage'
 import DirectorPage from './DirectorPage'
+// boo
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   const [gigs, setGigs] = useState([])
 
   useEffect(() => {
-    fetch("/gigs")
+    fetch("/api/v1/gigs")
     .then((r) => r.json())
     .then(object => setGigs(object))
   }, [])

@@ -14,7 +14,7 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
     const [errorData, setErrorData] = useState([])
 
     useEffect(() => {
-        fetch(`/gigs/${user.role_id}`)
+        fetch(`/api/v1/gigs/${user.role_id}`)
         .then((r) => r.json())
         .then(object => setMyGigs(object))
     }, [])
@@ -60,7 +60,7 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
             end_date: endDate
         };
     
-        fetch(`/gigs/${user.role_id}`, {
+        fetch(`/api/v1/gigs/${user.role_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

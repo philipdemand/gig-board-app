@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" })
+    fetch("/api/v1/logout", { method: "DELETE" })
       .then((r) => {
         if (r.ok) {
           setUser(null);

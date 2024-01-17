@@ -1,4 +1,4 @@
-class ApplicationsController < ApplicationController
+class Api::V1::ApplicationsController < ApplicationController
 
     def create
         musician = Musician.find(params[:num])
@@ -35,4 +35,5 @@ class ApplicationsController < ApplicationController
         params.require(:application).permit(:gig_id, :message, :status)
     end
 
-end
+ end
+   

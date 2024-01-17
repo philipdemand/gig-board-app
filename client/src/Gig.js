@@ -14,7 +14,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
     const [selectedApplication, setSelectedApplication] = useState(null);
 
     useEffect(() => {
-        fetch(`/applications/${myGig.id}`)
+        fetch(`/api/v1/applications/${myGig.id}`)
         .then((r) => r.json ())
         .then(object => setGigApplications(object))
     }, [])
@@ -27,6 +27,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
                 return app
             }
         })
+        setSelectedApplication(appObject)
         setGigApplications(updatedApplications)
     }
 
@@ -55,7 +56,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
   
       const updateTitle = async () => {
           try {
-              const response = await fetch(`/gigs/${myGig.id}`, {
+              const response = await fetch(`/api/v1/gigs/${myGig.id}`, {
                   method: "PATCH",
                   headers: {
                       "Content-Type": "application/json",
@@ -84,7 +85,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
   const handleDescriptionSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch(`/gigs/${myGig.id}`, {
+          const response = await fetch(`/api/v1/gigs/${myGig.id}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -114,7 +115,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
       e.preventDefault();
   
       try {
-          const response = await fetch(`/gigs/${myGig.id}`, {
+          const response = await fetch(`/api/v1/gigs/${myGig.id}`, {
               method: "DELETE"
           });
   

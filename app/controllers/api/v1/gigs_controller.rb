@@ -1,4 +1,4 @@
-class GigsController < ApplicationController
+class Api::V1::GigsController < ApplicationController
 
     def create
         director = Director.find(params[:num])
@@ -15,16 +15,16 @@ class GigsController < ApplicationController
         gigs = Gig.all.order(start_date: :asc)
         render json: gigs
     end
-    
+            
     def update
         user = User.find(session[:user_id])
         director = Director.find(user[:role_id])
         gig = director.gigs.find(params[:id])
         if gig
-          gig.update!(gig_params)
-          render json: gig
+        gig.update!(gig_params)
+        render json: gig
         else
-          render json: { error: 'Unauthorized: You do not have permission to update this gig record.' }, status: :unauthorized
+        render json: { error: 'Unauthorized: You do not have permission to update this gig record.' }, status: :unauthorized
         end
     end
 

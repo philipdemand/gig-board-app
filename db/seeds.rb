@@ -5,3 +5,49 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+user1 = User.create(role: Director.new, username: "director1", email: "director1@example.com", password: "password")
+user2 = User.create(role: Director.new, username: "director2", email: "director2@example.com", password: "password")
+user3 = User.create(role: Musician.new, username: "musician1", email: "musician1@example.com", password: "password")
+user4 = User.create(role: Musician.new, username: "musician2", email: "musician2@example.com", password: "password")
+
+3.times do |i|
+    Gig.create!(
+      director_id: user1.role.id,
+      title: "Director 1 Gig #{i + 1}",
+      start_date: Date.today + rand(30),
+      end_date: Date.today + rand(30),
+      description: "Director 1 Gig #{i + 1} Description"
+    )
+  end
+  
+  3.times do |i|
+    Gig.create!(
+      director_id: user2.role.id,
+      title: "Director 2 Gig #{i + 1}",
+      start_date: Date.today + rand(30),
+      end_date: Date.today + rand(30),
+      description: "Director 2 Gig #{i + 1} Description"
+    )
+  end
+
+# 3.times do
+#   Gig.create!(
+#     director_id: 1,
+#     title: "Director 1 Gig",
+#     start_date: Date.today + rand(30),
+#     end_date: Date.today + rand(30),
+#     description: "Director 1 Gig Description"
+#   )
+# end
+
+# 3.times do
+#   Gig.create!(
+#     director_id: 2,
+#     title: "Director 2 Gig",
+#     start_date: Date.today + rand(30),
+#     end_date: Date.today + rand(30),
+#     description: "Director 2 Gig Description"
+#   )
+# end
