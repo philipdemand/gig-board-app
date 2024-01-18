@@ -44,6 +44,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     ) : (
+      
       <Routes>
         <Route path="/musician" element={<MusicianPage gigs={gigs}/>} />
         <Route path="/director" element={<DirectorPage onDeleteGig={handleDeleteGig} onAddGig={handleAddGig} onEditGig={handleEditGig}/>} />
