@@ -111,7 +111,7 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
                 />
                 <br></br>
                 Description:
-                <input 
+                <textarea 
                 type="text"
                 name="description"
                 value={description}

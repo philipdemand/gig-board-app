@@ -22,13 +22,15 @@ function MusicianPage({ gigs }) {
         setMyApps(updatedApps)
     }
 
-    const gigsWithStatusAndAppId = gigs.map(gig => {
-        const application = myApps.find(app => app.gig_id === gig.id);
+    const gigsWithStatusAndAppId = Array.isArray(gigs)
+    ? gigs.map((gig) => {
+        const application = myApps.find((app) => app.gig_id === gig.id);
         const applicationStatus = application ? application.status : null;
         const appId = application ? application.id : null;
-      
+
         return { ...gig, application_status: applicationStatus, app_id: appId };
-      });
+      })
+    : [];
 
     return (
         <>

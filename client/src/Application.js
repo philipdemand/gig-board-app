@@ -61,7 +61,7 @@ function Application({ application, onUpdateStatus }) {
     <div className="application-popout">
       <h3>Applicant Information</h3>
       <p><strong>Username:</strong> {application.username}</p>
-      <p><strong>Email:</strong> {application.email}</p>
+      <p><strong>Email:</strong> <a href={`mailto:${application.email}`}>{application.email}</a></p>
       <p><strong>Message:</strong> {application.message}</p>
 
       {!appStatus ?

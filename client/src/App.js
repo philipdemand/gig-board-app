@@ -7,7 +7,6 @@ import SignUpPage from './SignUpPage'
 import LandingPage from './LandingPage'
 import MusicianPage from './MusicianPage'
 import DirectorPage from './DirectorPage'
-// boo
 
 function App() {
 

@@ -20,13 +20,9 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
     }, [])
 
     const handleUpdateAppStatus = (appObject) => {
-        const updatedApplications = gigApplications.map(app => {
-            if (app.id === appObject.id) {
-                return appObject
-            } else {
-                return app
-            }
-        })
+        const updatedApplications = gigApplications.map(app => 
+          app.id === appObject.id ? appObject : app
+        )
         setSelectedApplication(appObject)
         setGigApplications(updatedApplications)
     }
@@ -133,10 +129,11 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
 
     return (
         <div className="gig-container">
+          <div className="gig-header">
             <h2>{myGig.title} <button onClick={toggleEditTitle}>Edit</button></h2>
-            {isEditTitleClicked
-            ? 
-            <form onSubmit={handleTitleSubmit}>
+              {isEditTitleClicked
+              ? 
+              <form onSubmit={handleTitleSubmit}>
                 <input
                     type="text"
                     name="title"
@@ -144,30 +141,38 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
                     onChange={handleTitleChange}
                 />
                 <button>Submit</button>
-            </form>
-            : null
-            }
-            {titleErrorData.length > 0 ? <ul style={{ color: "red" }}>
+              </form>
+              : null
+              }
+              {titleErrorData.length > 0 ? <ul style={{ color: "red" }}>
               {titleErrorData.map((error, i) => <li key={i}>{error}</li>)}
-            </ul> : null}
-            Start Date:<h4>{myGig.start_date}</h4>
-            <h4>{myGig.description} <button onClick={toggleEditDescription}>Edit</button></h4>
-            {isEditDescriptionClicked
-            ? 
-            <form onSubmit={handleDescriptionSubmit}>
-                <input
-                    type="text"
-                    name="title"
-                    value={description}
-                    onChange={handleDescriptionChange}
-                />
-                <button>Submit</button>
-            </form>
-            : null
-            }
-            {descriptionErrorData.length > 0 ? <ul style={{ color: "red" }}>
-              {descriptionErrorData.map((error, i) => <li key={i}>{error}</li>)}
-            </ul> : null}
+              </ul> : null}
+              <h4>Start Date:  {myGig.start_date}</h4>
+            </div>
+            <div className="gig-description">
+        <h4>
+          {myGig.description}{" "}
+          <button onClick={toggleEditDescription}>Edit</button>
+        </h4>
+        {isEditDescriptionClicked ? (
+          <form onSubmit={handleDescriptionSubmit}>
+            <input
+              type="text"
+              name="title"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+            <button>Submit</button>
+          </form>
+        ) : null}
+        {descriptionErrorData.length > 0 ? (
+          <ul style={{ color: "red" }}>
+            {descriptionErrorData.map((error, i) => (
+              <li key={i}>{error}</li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
             <button onClick={handleDeleteGig}>Delete Gig</button>
             <div className="gig-container"><h2>Applications:</h2>
               {gigApplications.map(gigApplication => 
