@@ -17,19 +17,22 @@ function MusicianPage({ gigs }) {
 //   }, [user.role_id])
 
 useEffect(() => {
-    console.log('Gigs prop:', gigs);
-    fetch(`/api/v1/myapps/${user.role_id}`)
-      .then((r) => r.json())
-      .then((object) => {
-        console.log('Fetched data:', object);
-        setMyApps(object);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
-  }, [user.role_id, gigs]);
+    if (user && user.role_id) {
+      fetch(`/api/v1/myapps/${user.role_id}`)
+        .then((r) => r.json())
+        .then((object) => {
+          setMyApps(object);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        });
+    } else {
+      setMyApps([]);
+      setLoading(false);
+    }
+  }, [user]);
 
   const handleAddApp = (appObject) => {
     setMyApps([...myApps, appObject]);
