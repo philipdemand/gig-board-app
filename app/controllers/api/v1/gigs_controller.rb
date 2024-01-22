@@ -1,5 +1,7 @@
 class Api::V1::GigsController < ApplicationController
 
+    skip_before_action :authorized, only: :index
+
     def create
         director = Director.find(params[:num])
         gig = director.gigs.create!(gig_params)
