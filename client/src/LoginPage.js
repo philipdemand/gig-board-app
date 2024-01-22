@@ -37,7 +37,7 @@ const LoginPage = () => {
         method: "POST",
         body: JSON.stringify(submittedUser),
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
       });
 

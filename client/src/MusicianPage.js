@@ -7,32 +7,32 @@ function MusicianPage({ gigs }) {
   const [myApps, setMyApps] = useState([]);
   const [loading, setLoading] = useState(true);
 
-//   useEffect(() => {
-//     fetch(`/api/v1/myapps/${user.role_id}`)
-//       .then((r) => r.json())
-//       .then((object) => {
-//         setMyApps(object);
-//         setLoading(false)
-//       });
-//   }, [user.role_id])
+  useEffect(() => {
+    fetch(`/api/v1/myapps/${user.role_id}`)
+      .then((r) => r.json())
+      .then((object) => {
+        setMyApps(object);
+        setLoading(false)
+      });
+  }, [user.role_id])
 
-useEffect(() => {
-    if (user && user.role_id) {
-      fetch(`/api/v1/myapps/${user.role_id}`)
-        .then((r) => r.json())
-        .then((object) => {
-          setMyApps(object);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-          setLoading(false);
-        });
-    } else {
-      setMyApps([]);
-      setLoading(false);
-    }
-  }, [user]);
+// useEffect(() => {
+//     if (user && user.role_id) {
+//       fetch(`/api/v1/myapps/${user.role_id}`)
+//         .then((r) => r.json())
+//         .then((object) => {
+//           setMyApps(object);
+//           setLoading(false);
+//         })
+//         .catch((error) => {
+//           console.error('Error fetching data:', error);
+//           setLoading(false);
+//         });
+//     } else {
+//       setMyApps([]);
+//       setLoading(false);
+//     }
+//   }, [user]);
 
   const handleAddApp = (appObject) => {
     setMyApps([...myApps, appObject]);

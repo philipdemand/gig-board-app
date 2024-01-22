@@ -13,11 +13,28 @@ function App() {
   const {user} = useContext(UserContext);
   const [gigs, setGigs] = useState([])
 
+  // useEffect(() => {
+  //   fetch("/api/v1/gigs")
+  //   .then((r) => r.json())
+  //   .then(object => setGigs(object))
+  // }, [])
+
   useEffect(() => {
-    fetch("/api/v1/gigs")
-    .then((r) => r.json())
-    .then(object => setGigs(object))
-  }, [])
+    const fetchGigs = async () => {
+      try {
+        const res = await fetch("/api/v1/gigs");
+        if (res.ok) {
+          const data = await res.json();
+          setGigs(data);
+        } else {
+          console.error("Failed to fetch gigs:", res.statusText);
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching gigs:", error.message);
+      }
+    };
+    fetchGigs();
+  }, []);
 
   const handleAddGig = (gigObj) => {
     setGigs([...gigs, gigObj])
