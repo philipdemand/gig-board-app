@@ -37,3 +37,31 @@ user4 = User.create(role: Musician.new, username: "musician2", email: "musician2
 #       description: "Director 2 Gig #{i + 1} Description"
 #     )
 #   end
+
+def random_date(range)
+  Date.today + rand(range)
+end
+
+3.times do |i|
+  start_date = random_date(30)
+  end_date = random_date(30..60)
+  Gig.create!(
+    director_id: user1.role.id,
+    title: "Director 1 Gig #{i + 1}",
+    start_date: start_date,
+    end_date: end_date,
+    description: "Director 1 Gig #{i + 1} Description"
+  )
+end
+
+3.times do |i|
+  start_date = random_date(30)
+  end_date = random_date(30..60)
+  Gig.create!(
+    director_id: user2.role.id,
+    title: "Director 2 Gig #{i + 1}",
+    start_date: start_date,
+    end_date: end_date,
+    description: "Director 2 Gig #{i + 1} Description"
+  )
+end
