@@ -11,6 +11,8 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [errorData, setErrorData] = useState([]);
+  const [startDateError, setStartDateError] = useState("")
+  const [endDateError, setEndDateError] = useState("")
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,11 +49,25 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
   };
 
   const handleStartDateChange = (e) => {
-    setStartDate(e.target.value);
+    const selectedStartDate = e.target.value;
+    const today = new Date().toISOString().split('T')[0];
+    if (selectedStartDate < today) {
+      setStartDateError("Start date cannot be in the past");
+    } else {
+      setStartDate(selectedStartDate);
+      setStartDateError("")
+    }
   };
 
   const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
+    const enteredDate = e.target.value;
+  
+    if (enteredDate < startDate) {
+      setEndDateError("End date cannot be before start date");
+    } else {
+      setEndDate(enteredDate);
+      setEndDateError("")
+    }
   };
 
   const handleSubmit = (e) => {
@@ -109,6 +125,11 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
               value={startDate}
               onChange={handleStartDateChange}
             />
+            {startDateError ? (
+        <ul style={{ color: 'red' }}>
+          <li>{startDateError}</li>
+        </ul>
+      ) : null}
             <br></br>
             End Date:
             <input
@@ -117,6 +138,11 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
               value={endDate}
               onChange={handleEndDateChange}
             />
+            {endDateError ? (
+        <ul style={{ color: 'red' }}>
+          <li>{endDateError}</li>
+        </ul>
+      ) : null}
             <br></br>
             Description:
             <textarea

@@ -13,12 +13,6 @@ function App() {
   const {user} = useContext(UserContext);
   const [gigs, setGigs] = useState([])
 
-  // useEffect(() => {
-  //   fetch("/api/v1/gigs")
-  //   .then((r) => r.json())
-  //   .then(object => setGigs(object))
-  // }, [])
-
   useEffect(() => {
     const fetchGigs = async () => {
       try {
