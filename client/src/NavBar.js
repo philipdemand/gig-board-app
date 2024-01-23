@@ -23,9 +23,15 @@ const Navbar = () => {
       });
   }
 
+  const handleNavbarTitleClick = () => {
+    if (!user) {
+      navigate("/");
+    }
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar-title">Gig Board</div>
+      <div className="navbar-title" onClick={handleNavbarTitleClick}>Gig Board</div>
       {user ? (
         <div className="navbar-user">
           <span className="welcome-message">Welcome, {user.username}</span>
