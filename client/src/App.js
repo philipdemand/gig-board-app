@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import NavBar from './NavBar';
 import { Routes, Route } from 'react-router-dom';
-import { UserContext } from './contexts/UserContext'
+import { UserContext } from './contexts/UserContext';
 import LoginPage from './LoginPage'
 import SignUpPage from './SignUpPage'
 import LandingPage from './LandingPage'
