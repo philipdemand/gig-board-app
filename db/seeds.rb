@@ -26,7 +26,7 @@ end
   start_date = random_date(30)
   end_date = random_date(30..60)
   Gig.create!(
-    director_id: user1.role.id,
+    director_id: user1.role_id,
     title: "Director 1 Gig #{i + 1}",
     start_date: start_date,
     end_date: end_date,
@@ -38,7 +38,7 @@ end
   start_date = random_date(30)
   end_date = random_date(30..60)
   Gig.create!(
-    director_id: user2.role.id,
+    director_id: user2.role_id,
     title: "Director 2 Gig #{i + 1}",
     start_date: start_date,
     end_date: end_date,
