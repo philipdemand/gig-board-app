@@ -18,6 +18,8 @@ user2 = User.create(role: Director.new, username: "director2", email: "director2
 user3 = User.create(role: Musician.new, username: "musician1", email: "musician1@example.com", password: "password")
 user4 = User.create(role: Musician.new, username: "musician2", email: "musician2@example.com", password: "password")
 
+sleep(1)
+
 def random_date(range)
   Date.today + rand(range)
 end
