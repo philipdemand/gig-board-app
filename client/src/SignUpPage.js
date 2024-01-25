@@ -96,7 +96,7 @@ const SignUpPage = () => {
         <div>
             <label htmlFor="roleSelect">Select Role:</label>
             <select id="roleSelect" value={role} onChange={handleRoleChange}>
-                <option value="Select Role">Select Role</option>
+                <option value="">Select Role</option>
                 <option value="Musician">Musician</option>
                 <option value="Director">Director</option>
             </select>
