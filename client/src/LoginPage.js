@@ -64,8 +64,13 @@ const LoginPage = () => {
     }
   }
 
+  const handleSwitch = () => {
+    navigate("/signup")
+  }
+
   return (
     <div className="event">
+      <h3>Become a member</h3><button onClick={handleSwitch}>Signup</button>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

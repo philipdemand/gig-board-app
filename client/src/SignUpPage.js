@@ -68,8 +68,13 @@ const SignUpPage = () => {
     setEmail(event.target.value);
   };
 
+  const handleSwitch = () => {
+    navigate("/login")
+  }
+
   return (
     <div className="event">
+      <h3>Already a member?</h3><button onClick={handleSwitch}>Login</button>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -91,7 +96,7 @@ const SignUpPage = () => {
         <div>
             <label htmlFor="roleSelect">Select Role:</label>
             <select id="roleSelect" value={role} onChange={handleRoleChange}>
-                <option value="Select Role">Select Role</option>
+                <option value="">Select Role</option>
                 <option value="Musician">Musician</option>
                 <option value="Director">Director</option>
             </select>
