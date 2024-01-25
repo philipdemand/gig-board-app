@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
-# Musician.destroy_all
-# Director.destroy_all
+# User.destroy_all
+Musician.destroy_all
+Director.destroy_all
 Gig.destroy_all
 Application.destroy_all
 
@@ -25,7 +25,7 @@ end
   start_date = random_date(30)
   end_date = random_date(30..60)
   Gig.create!(
-    director_id: user1.role_id,
+    director_id: 1,
     title: "Director 1 Gig #{i + 1}",
     start_date: start_date,
     end_date: end_date,
@@ -37,7 +37,7 @@ end
   start_date = random_date(30)
   end_date = random_date(30..60)
   Gig.create!(
-    director_id: user2.role_id,
+    director_id: 2,
     title: "Director 2 Gig #{i + 1}",
     start_date: start_date,
     end_date: end_date,
