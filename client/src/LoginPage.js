@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from './contexts/UserContext'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -69,23 +71,32 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="event">
-      <h3>Become a member</h3><button onClick={handleSwitch}>Signup</button>
-      <h2>Login</h2>
+    <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh'
+    }}>
+    <Card style={{ width: '300px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }} className="event">
+      <Card.Text style={{ color: '#007bff', textAlign: 'center' }}>Become a member</Card.Text>
+      <Button size="sm" onClick={handleSwitch} style={{ marginBottom: '10px', width: '100%' }}>Signup</Button>
+      <Card.Title style={{ textAlign: 'center' }}>Login</Card.Title>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{ marginBottom: '10px' }}>
           <label htmlFor="username">Username:</label>
-          <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+          <input type="text" id="username" value={username} onChange={handleUsernameChange} className="form-control" />
         </div>
-        <div>
+        <div style={{ marginBottom: '10px' }}>
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} className="form-control" />
         </div>
-        <button type="submit">Login</button>
-        {errorData.length > 0 ? <ul style={{ color: "red" }}>
+        <Button size="sm" type="submit" style={{ width: '100%' }}>Login</Button>
+        {errorData.length > 0 ? <ul style={{ color: 'red', marginTop: '10px', listStyleType: 'none', padding: 0 }}>
           {errorData.map((error, i) => <li key={i}>{error}</li>)}
         </ul> : null}
       </form>
+    </Card>
     </div>
   );
 };

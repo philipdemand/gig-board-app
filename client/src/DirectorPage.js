@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from './contexts/UserContext';
 import Gig from './Gig';
+import Button from 'react-bootstrap/Button';
 
 function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
   const { user } = useContext(UserContext);
@@ -103,9 +104,9 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
 
   return (
     <>
-      <h1>Music Director Portal</h1>
+      <h2 style={{paddingBottom: "10px", paddingTop: "10px", paddingLeft: "10px"}}>Music Director Portal</h2>
       {!isClicked ? (
-        <button onClick={handleClick}>Post a New Gig</button>
+        <div style={{paddingLeft: "10px"}}><Button size="sm" onClick={handleClick}>Post a New Gig</Button></div>
       ) : null}
       {isClicked ? (
         <div>
@@ -152,7 +153,7 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
               onChange={handleDescriptionChange}
             />
             <br></br>
-            <button type="submit">Submit</button>
+            <Button size="sm"type="submit">Submit</Button>
           </form>
         </div>
       ) : null}
@@ -166,8 +167,8 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <h1>My Gigs</h1>
+        <div style={{paddingLeft: "10px", paddingTop: "10px"}}>
+          <h3 style={{textAlign: 'center'}}>My Gigs</h3>
           {myGigs.map((myGig) => (
             <Gig
               key={myGig.id}
@@ -178,7 +179,7 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
               onEditMyGig={handleEditMyGig}
             />
           ))}
-        </>
+          </div>
       )}
     </>
   );

@@ -10,7 +10,7 @@ import DirectorPage from './DirectorPage'
 
 function App() {
 
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [gigs, setGigs] = useState([])
 
   useEffect(() => {
@@ -41,27 +41,26 @@ function App() {
 
   const handleEditGig = (gigObj) => {
     const updatedGigs = gigs.map(gig => (
-      gig.id === gigObj.id ? gigObj : gig ))
+      gig.id === gigObj.id ? gigObj : gig))
     setGigs(updatedGigs)
   }
 
   return (
-    <>
+    <div>
       <NavBar />
       {!user ? (
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-      </Routes>
-    ) : (
-      
-      <Routes>
-        <Route path="/musician" element={<MusicianPage gigs={gigs}/>} />
-        <Route path="/director" element={<DirectorPage onDeleteGig={handleDeleteGig} onAddGig={handleAddGig} onEditGig={handleEditGig}/>} />
-      </Routes>
-    )}
-    </>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/musician" element={<MusicianPage gigs={gigs} />} />
+          <Route path="/director" element={<DirectorPage onDeleteGig={handleDeleteGig} onAddGig={handleAddGig} onEditGig={handleEditGig} />} />
+        </Routes>
+      )}
+    </div>
   );
 }
 
