@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from './contexts/UserContext';
 import Gig from './Gig';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
   const { user } = useContext(UserContext);
@@ -95,6 +96,10 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
             setMyGigs([...myGigs, data]);
             setIsClicked(false);
             setErrorData([]);
+            setTitle("")
+            setStartDate("")
+            setEndDate("")
+            setDescription("")
           } else {
             setErrorData(data.errors);
           }
@@ -107,54 +112,61 @@ function DirectorPage({ onAddGig, onDeleteGig, onEditGig }) {
       <h2 style={{paddingBottom: "10px", paddingTop: "10px", paddingLeft: "10px"}}>Music Director Portal</h2>
       {!isClicked ? (
         <div style={{paddingLeft: "10px"}}><Button size="sm" onClick={handleClick}>Post a New Gig</Button></div>
-      ) : null}
-      {isClicked ? (
-        <div>
-          <form onSubmit={handleSubmit}>
-            Title:
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <br></br>
-            Start Date:
-            <input
-              type="date"
-              name="startdate"
-              value={startDate}
-              onChange={handleStartDateChange}
-            />
+      ) : 
+      null}
+      {isClicked ? 
+      (
+          <div className="centerform">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-1" controlId="formBasicTitle">
+              <Form.Label>Title:</Form.Label>
+              <Form.Control 
+                type="text" 
+                placeholder="Title"
+                value={title}
+                onChange={handleTitleChange}
+                 />
+            </Form.Group>
+            <Form.Group className="mb-1" controlId="formBasicStartDate">
+              <Form.Label>Start Date:</Form.Label>
+              <Form.Control 
+                type="date" 
+                placeholder="Start Date"
+                value={startDate}
+                onChange={handleStartDateChange}
+                 />
+            </Form.Group>
             {startDateError ? (
         <ul style={{ color: 'red' }}>
           <li>{startDateError}</li>
         </ul>
       ) : null}
-            <br></br>
-            End Date:
-            <input
-              type="date"
-              name="enddate"
-              value={endDate}
-              onChange={handleEndDateChange}
-            />
+            <Form.Group className="mb-1" controlId="formBasicEndDate">
+              <Form.Label>End Date:</Form.Label>
+              <Form.Control 
+                type="date" 
+                placeholder="End Date"
+                value={endDate}
+                onChange={handleEndDateChange}
+                 />
+            </Form.Group>
             {endDateError ? (
         <ul style={{ color: 'red' }}>
           <li>{endDateError}</li>
         </ul>
       ) : null}
-            <br></br>
-            Description:
-            <textarea
-              type="text"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
-            <br></br>
+            <Form.Group className="mb-1" controlId="formBasicDescription">
+              <Form.Label>Description:</Form.Label>
+              <Form.Control 
+                type="text" 
+                placeholder="Description"
+                value={description}
+                onChange={handleDescriptionChange}
+                 />
+            </Form.Group>
             <Button size="sm"type="submit">Submit</Button>
-          </form>
+            <Button size="sm" onClick={handleClick}>Cancel</Button>
+          </Form>
         </div>
       ) : null}
       {errorData.length > 0 ? (

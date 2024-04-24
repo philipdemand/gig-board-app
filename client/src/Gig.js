@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Application from './Application'
 import './Gig.css';
+import Button from 'react-bootstrap/Button';
 
 function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
 
@@ -130,7 +131,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
     return (
         <div className="gig-container">
           <div className="gig-header">
-            <h2>{myGig.title} <button onClick={toggleEditTitle}>Edit</button></h2>
+            <h2>{myGig.title} <Button size="sm" onClick={toggleEditTitle}>Edit</Button></h2>
               {isEditTitleClicked
               ? 
               <form onSubmit={handleTitleSubmit}>
@@ -140,7 +141,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
                     value={title}
                     onChange={handleTitleChange}
                 />
-                <button>Submit</button>
+                <Button size="sm">Submit</Button>
               </form>
               : null
               }
@@ -152,7 +153,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
             <div className="gig-description">
         <h4>
           {myGig.description}{" "}
-          <button onClick={toggleEditDescription}>Edit</button>
+          <Button size="sm" onClick={toggleEditDescription}>Edit</Button>
         </h4>
         {isEditDescriptionClicked ? (
           <form onSubmit={handleDescriptionSubmit}>
@@ -162,7 +163,7 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
               value={description}
               onChange={handleDescriptionChange}
             />
-            <button>Submit</button>
+            <Button size="sm">Submit</Button>
           </form>
         ) : null}
         {descriptionErrorData.length > 0 ? (
@@ -173,22 +174,23 @@ function Gig({ myGig, onEditMyGig, onDeleteGig, onDeleteMyGig, onEditGig }) {
           </ul>
         ) : null}
       </div>
-            <button onClick={handleDeleteGig}>Delete Gig</button>
+            <Button size="sm" onClick={handleDeleteGig}>Delete Gig</Button>
             <div className="gig-container"><h2>Applications:</h2>
               {gigApplications.map(gigApplication => 
-                <button
+                <div style={{paddingBottom: "5px"}}><Button 
+                    size="sm"
                     key={gigApplication.id}
                     onClick={() => handleApplicationClick(gigApplication)}
                     >
                     {gigApplication.username}
-                </button>
+                </Button></div>
               )}
             </div>
             {selectedApplication && (
         <div className="overlay">
           <div className="popout">
             <Application application={selectedApplication} onUpdateStatus={handleUpdateAppStatus}/>
-            <button onClick={handleCloseApplication}>Close</button>
+            <Button size="sm" onClick={handleCloseApplication}>Close</Button>
           </div>
         </div>
       )}
